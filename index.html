@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>JeuSet – Score tennis</title>
+  <meta name="description" content="Notez le score d'un match de tennis depuis le bord du court : avantage ou point décisif, tie-break, super tie-break, côté du service.">
+  <meta name="theme-color" content="#14365d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="JeuSet">
+  <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">
+        <img src="assets/favicon.svg" alt="" width="38" height="38">
+        <div>
+          <h1>JeuSet</h1>
+          <p id="subtitle">Nouveau match</p>
+        </div>
+      </div>
+      <button type="button" class="ghost" id="undo" hidden>↶ Annuler</button>
+      <button type="button" class="ghost" id="new-match" hidden>Nouveau</button>
+    </header>
+
+    <!-- Match in progress -->
+    <section id="match" aria-label="Tableau de score" hidden>
+      <div class="board" id="board"></div>
+    </section>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <p class="serve-info" id="serve-info"></p>
+
+    <button type="button" class="share-button" id="share" hidden>Partager le score</button>
+    <div class="share-panel" id="share-panel" hidden>
+      <p class="share-title">Partager le score</p>
+      <div class="share-actions">
+        <a class="ghost" id="share-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="ghost" id="share-mail">E-mail</a>
+        <button type="button" class="ghost" id="share-copy">Copier</button>
+      </div>
+      <p class="hint" id="share-feedback" role="status"></p>
+      <button type="button" class="ghost close" id="share-close">Fermer</button>
+    </div>
+
+    <div class="confirm" id="confirm" hidden>
+      <p>Abandonner ce match et en commencer un nouveau ?</p>
+      <button type="button" class="ghost" id="confirm-no">Non</button>
+      <button type="button" class="primary compact" id="confirm-yes">Oui</button>
+    </div>
+
+    <div class="pads" id="pads" hidden>
+      <button type="button" class="pad" id="pad-0">
+        <span class="plus" aria-hidden="true">+</span>
+        <span class="pad-label"><span id="pad-name-0"></span><small>Point</small></span>
+      </button>
+      <button type="button" class="pad" id="pad-1">
+        <span class="plus" aria-hidden="true">+</span>
+        <span class="pad-label"><span id="pad-name-1"></span><small>Point</small></span>
+      </button>
+    </div>
+
+    <section class="result" id="result" aria-live="polite" hidden></section>
+
+    <!-- Match settings -->
+    <form class="setup" id="setup" hidden>
+      <fieldset class="card">
+        <legend class="sr-only">Joueurs</legend>
+        <div class="names">
+          <div class="field"><label for="name-0">Joueur 1</label><input id="name-0" maxlength="18" autocomplete="off"></div>
+          <div class="field"><label for="name-1">Joueur 2</label><input id="name-1" maxlength="18" autocomplete="off"></div>
+        </div>
+        <div><span class="label">Premier serveur</span><div class="seg" data-key="firstServer"></div></div>
+      </fieldset>
+
+      <fieldset class="card">
+        <legend class="sr-only">Format du match</legend>
+        <div><span class="label">Format</span><div class="seg" data-key="sets"></div></div>
+        <div><span class="label">Jeux par set</span><div class="seg" data-key="games"></div></div>
+        <div>
+          <span class="label">À 40-40</span><div class="seg" data-key="advantage"></div>
+          <p class="hint" id="advantage-hint"></p>
+        </div>
+        <div><span class="label" id="tie-break-label">Tie-break</span><div class="seg" data-key="tieBreak"></div></div>
+        <div id="final-set-field">
+          <span class="label">Dernier set</span><div class="seg" data-key="finalSet"></div>
+          <p class="hint">Le super tie-break se joue en 10 points, avec 2 points d'écart.</p>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="primary">Commencer le match</button>
+    </form>
+
+    <noscript><p class="hint">JavaScript doit être activé pour utiliser JeuSet.</p></noscript>
+  </main>
+
+  <script src="assets/js/score.js"></script>
+  <script src="assets/js/summary.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

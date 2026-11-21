@@ -1,0 +1,20 @@
+{
+  "name": "jeuset",
+  "version": "1.0.0",
+  "description": "Mobile web app to keep the score of a tennis match from the side of the court.",
+  "private": true,
+  "main": "assets/js/score.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": ["tennis", "score", "scoreboard", "tie-break", "pwa"],
+  "author": "Nicolas DALLEDONNE",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndalledonne/jeuset.git"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

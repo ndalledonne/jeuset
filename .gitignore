@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+desktop.ini
+
+# Build output
+dist/
+
+# Environment / coverage
+.env
+.env.*
+coverage/
