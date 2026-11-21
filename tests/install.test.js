@@ -26,3 +26,10 @@ test('install mode', () => {
   assert.equal(installMode({ ...base, userAgent: IPHONE }), 'ios');
   assert.equal(installMode({ ...base, maxTouchPoints: 0, userAgent: IPAD_DESKTOP }), 'none');
 });
+
+test('iOS help text fits every iOS browser, not only Safari', () => {
+  const html = require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'index.html'), 'utf8');
+  const panel = html.match(/<div class="share-panel" id="install-panel"[\s\S]*?<\/div>/)[0];
+  assert.doesNotMatch(panel, /Safari/);
+  assert.match(panel, /barre d'adresse/);
+});
