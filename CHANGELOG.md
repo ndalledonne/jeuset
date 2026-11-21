@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-21
+
 ### Added
 
 - "Installer l'appli" button on the match settings screen: opens the browser's install dialog (Android Chrome, Edge...) or, on iPhone / iPad, shows how to add JeuSet to the home screen from the browser's Share menu. Hidden during a match, once installed, and on browsers that cannot install it. Decision logic in `assets/js/install.js`, with unit tests.

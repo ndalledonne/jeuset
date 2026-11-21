@@ -1,6 +1,6 @@
 {
   "name": "jeuset",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Mobile web app to keep the score of a tennis match from the side of the court.",
   "private": true,
   "main": "assets/js/score.js",
