@@ -146,6 +146,7 @@
     tieBreakLabel: $('tie-break-label'),
     advantageHint: $('advantage-hint'),
     install: $('install'),
+    installTop: $('install-top'),
     installPanel: $('install-panel'),
     installClose: $('install-close'),
   };
@@ -297,10 +298,12 @@
     el.share.hidden = !inMatch;
     el.sharePanel.hidden = !(inMatch && app.sharing);
     const install = installMode();
-    el.install.hidden = inMatch || install === 'none';
     el.installPanel.hidden = inMatch || install !== 'ios' || !app.installHelp;
-    if (install === 'ios') el.install.setAttribute('aria-expanded', String(!el.installPanel.hidden));
-    else el.install.removeAttribute('aria-expanded');
+    for (const button of [el.install, el.installTop]) {
+      button.hidden = inMatch || install === 'none';
+      if (install === 'ios') button.setAttribute('aria-expanded', String(!el.installPanel.hidden));
+      else button.removeAttribute('aria-expanded');
+    }
     el.subtitle.textContent = !inMatch ? 'Nouveau match' : app.match.winner !== null ? 'Terminé' : 'En cours';
 
     if (inMatch) {
@@ -480,10 +483,16 @@
     });
   }
 
-  async function installApp() {
+  /** Button that opened the iPhone / iPad help: focus goes back to it when the help is closed. */
+  let installOpener = el.install;
+
+  async function installApp(event) {
     if (installMode() === 'ios') {
+      installOpener = event.currentTarget;
       app.installHelp = !app.installHelp;
       render();
+      // The help sits at the bottom of the settings: bring it into view from the header button.
+      if (app.installHelp && installOpener === el.installTop) el.installPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     const prompt = app.installPrompt;
@@ -510,7 +519,8 @@
       render();
     });
     el.install.addEventListener('click', installApp);
-    el.installClose.addEventListener('click', () => { app.installHelp = false; render(); el.install.focus(); });
+    el.installTop.addEventListener('click', installApp);
+    el.installClose.addEventListener('click', () => { app.installHelp = false; render(); installOpener.focus(); });
   }
 
   /* ---------- Offline support ---------- */

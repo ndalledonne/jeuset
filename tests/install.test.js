@@ -39,3 +39,9 @@ test('install mode: the browser dialog wins, iPad user agent', () => {
   assert.equal(installMode({ standalone: false, hasPrompt: true, userAgent: IPHONE, maxTouchPoints: 5 }), 'prompt');
   assert.equal(isIOS(IPAD, 5), true);
 });
+
+test('header install button shares the help panel', () => {
+  const html = require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'index.html'), 'utf8');
+  const header = html.match(/<header class="top">[\s\S]*?<\/header>/)[0];
+  assert.match(header, /<button type="button" class="ghost install-top" id="install-top" aria-controls="install-panel" hidden>Installer<\/button>/);
+});

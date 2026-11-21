@@ -258,6 +258,10 @@ input:focus-visible { outline: 3px solid var(--ball); outline-offset: 2px; }
 
 .install-button::before { content: "⊕ "; content: "⊕ " / ""; }
 
+.install-top { min-height: 40px; font-size: 14px; }
+
+.install-top::before { content: "⊕ "; content: "⊕ " / ""; }
+
 /* ---------- Point buttons ---------- */
 
 .pads { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; min-height: 220px; }
