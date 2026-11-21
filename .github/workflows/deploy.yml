@@ -33,8 +33,9 @@ jobs:
       - name: Assemble site
         run: |
           mkdir site
-          cp -r index.html favicon.ico sw.js assets site/
+          cp -r index.html favicon.ico sw.js .htaccess assets site/
           find site -type f | sort
+          test -f site/.htaccess
 
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp

@@ -1,0 +1,16 @@
+# JeuSet — HTTP cache rules (Apache, Nuxit hosting)
+#
+# Without these headers, browsers guess how long to keep each file and may
+# serve an old app.js with a new index.html after a deployment. "no-cache"
+# means "keep it, but check with the server first": an unchanged file costs a
+# tiny 304 response, a changed one is downloaded at once.
+# Icons rarely change and may be kept for a week.
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css|webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(png|svg|ico)$">
+    Header set Cache-Control "max-age=604800"
+  </FilesMatch>
+</IfModule>

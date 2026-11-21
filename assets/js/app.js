@@ -299,6 +299,8 @@
     const install = installMode();
     el.install.hidden = inMatch || install === 'none';
     el.installPanel.hidden = inMatch || install !== 'ios' || !app.installHelp;
+    if (install === 'ios') el.install.setAttribute('aria-expanded', String(!el.installPanel.hidden));
+    else el.install.removeAttribute('aria-expanded');
     el.subtitle.textContent = !inMatch ? 'Nouveau match' : app.match.winner !== null ? 'Terminé' : 'En cours';
 
     if (inMatch) {
@@ -402,6 +404,7 @@
     app.match = Score.createMatch(app.config);
     app.history = [];
     app.formatShared = false;
+    app.installHelp = false;
     persist();
     render();
   }
@@ -507,7 +510,7 @@
       render();
     });
     el.install.addEventListener('click', installApp);
-    el.installClose.addEventListener('click', () => { app.installHelp = false; render(); });
+    el.installClose.addEventListener('click', () => { app.installHelp = false; render(); el.install.focus(); });
   }
 
   /* ---------- Offline support ---------- */

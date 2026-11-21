@@ -237,7 +237,7 @@ input:focus-visible { outline: 3px solid var(--ball); outline-offset: 2px; }
   font-weight: 600;
 }
 
-.share-button::before { content: "↗ "; }
+.share-button::before { content: "↗ "; content: "↗ " / ""; } /* decorative: not read aloud */
 
 .share-panel { display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); }
 
@@ -256,7 +256,7 @@ input:focus-visible { outline: 3px solid var(--ball); outline-offset: 2px; }
 
 .install-button { margin-top: 8px; }
 
-.install-button::before { content: "⊕ "; }
+.install-button::before { content: "⊕ "; content: "⊕ " / ""; }
 
 /* ---------- Point buttons ---------- */
 

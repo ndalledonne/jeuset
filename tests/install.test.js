@@ -33,3 +33,9 @@ test('iOS help text fits every iOS browser, not only Safari', () => {
   assert.doesNotMatch(panel, /Safari/);
   assert.match(panel, /barre d'adresse/);
 });
+
+test('install mode: the browser dialog wins, iPad user agent', () => {
+  const IPAD = 'Mozilla/5.0 (iPad; CPU OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1';
+  assert.equal(installMode({ standalone: false, hasPrompt: true, userAgent: IPHONE, maxTouchPoints: 5 }), 'prompt');
+  assert.equal(isIOS(IPAD, 5), true);
+});

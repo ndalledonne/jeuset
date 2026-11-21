@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Site not updating after a deployment: the service worker now checks every file with the server instead of using the browser's HTTP cache, and a new `.htaccess` sends `Cache-Control: no-cache` for pages, scripts and styles (icons: one week). The deployment uploads it.
+- iPhone install help no longer reopens by itself after a match.
+- Accessibility: the install button announces whether the help is open (`aria-expanded`), focus returns to it when the help is closed, and the decorative icons of the share and install buttons are no longer read aloud.
+
 ## [1.1.0] - 2026-11-21
 
 ### Added

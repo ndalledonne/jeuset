@@ -4,6 +4,8 @@
  * Lets the app open without a network connection (courts often have poor
  * reception). Strategy: network first, so a new version is picked up as soon
  * as it is online; the cached copy is used only when the network fails.
+ * Requests bypass the browser's HTTP cache ("no-cache": revalidated with the
+ * server), otherwise a stale app.js could be served after a deployment.
  *
  * Change CACHE_VERSION when the list of files changes.
  *
@@ -11,7 +13,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = 'jeuset-v3';
+const CACHE_VERSION = 'jeuset-v4';
 
 const APP_FILES = [
   './',
@@ -50,7 +52,7 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
 
   event.respondWith(
-    fetch(request)
+    fetch(request, { cache: 'no-cache' })
       .then((response) => {
         if (response.ok) {
           const copy = response.clone();

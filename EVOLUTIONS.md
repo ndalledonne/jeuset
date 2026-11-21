@@ -6,7 +6,7 @@ Les versions publiées sont décrites dans [CHANGELOG.md](CHANGELOG.md).
 ## Réalisé
 
 - [x] **Partager le score à tout moment** (WhatsApp, SMS, e-mail, copie) — version 1.0.0.
-- [x] **Bouton « Installer l'appli »** sur l'écran d'accueil (Android : fenêtre d'installation ; iPhone : mode d'emploi). — version 1.1.0.
+- [x] **Bouton « Installer l'appli »** sur l'écran d'accueil (Android : fenêtre d'installation ; iPhone : mode d'emploi) — version 1.1.0.
 
 ## Sans serveur (reste 100 % dans le navigateur)
 
