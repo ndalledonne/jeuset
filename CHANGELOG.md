@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-21
+
 ### Added
 
 - Compact "Installer" button in the header of the settings screen, in addition to the one under "Commencer le match". On iPhone / iPad it scrolls to the install help.
