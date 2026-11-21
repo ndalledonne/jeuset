@@ -11,7 +11,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = 'jeuset-v2';
+const CACHE_VERSION = 'jeuset-v3';
 
 const APP_FILES = [
   './',
@@ -20,6 +20,7 @@ const APP_FILES = [
   'assets/css/style.css',
   'assets/js/score.js',
   'assets/js/summary.js',
+  'assets/js/install.js',
   'assets/js/app.js',
   'assets/favicon.svg',
   'assets/site.webmanifest',

@@ -252,6 +252,12 @@ input:focus-visible { outline: 3px solid var(--ball); outline-offset: 2px; }
 
 .share-panel .close { align-self: flex-end; }
 
+/* ---------- Install ---------- */
+
+.install-button { margin-top: 8px; }
+
+.install-button::before { content: "⊕ "; }
+
 /* ---------- Point buttons ---------- */
 
 .pads { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; min-height: 220px; }

@@ -95,6 +95,13 @@
       </fieldset>
 
       <button type="submit" class="primary">Commencer le match</button>
+
+      <button type="button" class="share-button install-button" id="install" hidden>Installer l'appli</button>
+      <div class="share-panel" id="install-panel" hidden>
+        <p class="share-title">Installer JeuSet</p>
+        <p class="hint">Touchez <strong>Partager</strong> (le carré avec une flèche) dans Safari, puis <strong>Sur l'écran d'accueil</strong>.</p>
+        <button type="button" class="ghost close" id="install-close">Fermer</button>
+      </div>
     </form>
 
     <noscript><p class="hint">JavaScript doit être activé pour utiliser JeuSet.</p></noscript>
@@ -102,6 +109,7 @@
 
   <script src="assets/js/score.js"></script>
   <script src="assets/js/summary.js"></script>
+  <script src="assets/js/install.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

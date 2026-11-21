@@ -12,6 +12,7 @@
 
   const Score = window.JeuSetScore;
   const Summary = window.JeuSetSummary;
+  const Install = window.JeuSetInstall;
 
   /* ---------- Settings options (form) ---------- */
 
@@ -75,6 +76,10 @@
     sharing: false,
     /** true once the score of the current match has been shared (the format is then not repeated) */
     formatShared: false,
+    /** @type {null|Event} install dialog offered by the browser (beforeinstallprompt), usable once */
+    installPrompt: null,
+    /** true while the iPhone / iPad install help is open */
+    installHelp: false,
   };
 
   /** Minimal check that saved data is a match state of this version. */
@@ -140,6 +145,9 @@
     finalSetField: $('final-set-field'),
     tieBreakLabel: $('tie-break-label'),
     advantageHint: $('advantage-hint'),
+    install: $('install'),
+    installPanel: $('install-panel'),
+    installClose: $('install-close'),
   };
 
   /* ---------- Rendering: settings ---------- */
@@ -288,6 +296,9 @@
     el.confirm.hidden = !app.confirmingNewMatch;
     el.share.hidden = !inMatch;
     el.sharePanel.hidden = !(inMatch && app.sharing);
+    const install = installMode();
+    el.install.hidden = inMatch || install === 'none';
+    el.installPanel.hidden = inMatch || install !== 'ios' || !app.installHelp;
     el.subtitle.textContent = !inMatch ? 'Nouveau match' : app.match.winner !== null ? 'Terminé' : 'En cours';
 
     if (inMatch) {
@@ -455,6 +466,50 @@
     });
   }
 
+  /* ---------- Install on the home screen ---------- */
+
+  function installMode() {
+    return Install.installMode({
+      standalone: window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true,
+      hasPrompt: app.installPrompt !== null,
+      userAgent: navigator.userAgent,
+      maxTouchPoints: navigator.maxTouchPoints || 0,
+    });
+  }
+
+  async function installApp() {
+    if (installMode() === 'ios') {
+      app.installHelp = !app.installHelp;
+      render();
+      return;
+    }
+    const prompt = app.installPrompt;
+    if (!prompt) return;
+    app.installPrompt = null; // the browser's dialog can only be shown once
+    render();
+    try {
+      await prompt.prompt();
+      await prompt.userChoice;
+    } catch (error) {
+      // dialog refused by the browser: the button stays hidden until it is offered again
+    }
+  }
+
+  function bindInstall() {
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault(); // keep the dialog for our own button
+      app.installPrompt = event;
+      render();
+    });
+    window.addEventListener('appinstalled', () => {
+      app.installPrompt = null;
+      app.installHelp = false;
+      render();
+    });
+    el.install.addEventListener('click', installApp);
+    el.installClose.addEventListener('click', () => { app.installHelp = false; render(); });
+  }
+
   /* ---------- Offline support ---------- */
 
   function registerServiceWorker() {
@@ -467,6 +522,7 @@
 
   restore();
   bindEvents();
+  bindInstall();
   render();
   registerServiceWorker();
 })();
