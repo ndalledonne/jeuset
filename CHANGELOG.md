@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-11-21
+
 ### Fixed
 
 - Site not updating after a deployment: the service worker now checks every file with the server instead of using the browser's HTTP cache, and a new `.htaccess` sends `Cache-Control: no-cache` for pages, scripts and styles (icons: one week). The deployment uploads it.
